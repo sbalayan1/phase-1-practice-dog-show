@@ -8,13 +8,15 @@ document.getElementById('dog-form').addEventListener('submit', (e) => {
         }
     }
 
+    const dogInfo = {}
     const form = e.target
-    const dogInfo = {
-        name: form["name"].value, 
-        breed: form["breed"].value, 
-        sex: form["sex"].value
+    let i = 0
+    while (i<form.length-1) {
+        const child = form[i]
+        dogInfo[child.name] = child.value
+        i++
     }
-
+    
     fetchDogs()
     .then(data => {
         const foundDog = data.find(dog => dog.name === dogInfo.name)
